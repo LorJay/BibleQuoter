@@ -1,3 +1,4 @@
+document.body.style.zoom = "100%";
 var bibleBook = 0;
 var bibleChapter = 0;
 var quoteHeader = "";
@@ -50,6 +51,10 @@ function getData(url) {
     if (xhr.status === 200) {
       response = JSON.parse(xhr.responseText);
 
+      // Turn on Bible Nav Buttons
+      document.getElementById("Buttons").style.display = "inline";
+      document.body.style.zoom = "80%";
+
       // Get a random Book
       numberofBooksBible = Object.keys(response.books).length;
 
@@ -71,6 +76,11 @@ function getData(url) {
 function pickRandomBook() {
   // bibleBook = Math.floor(Math.random() * 66);
   bibleBook = document.getElementById("myList").value;
+  if (bibleBook > 38) {
+    document.getElementById("myImage").src = "./Jesus.jpg";
+  } else {
+    document.getElementById("myImage").src = "./Moses.jpg";
+  }
 }
 function displayChapterVerse() {
   quoteHeader =

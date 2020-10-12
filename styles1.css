@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
 
 body {
+  overflow-x: none;
   display: grid;
   height: 100vh;
-  grid-template: auto 1fr auto / auto 1fr auto
+  grid-template: auto 1fr auto / auto 1fr auto;
 }
 
 header {
-  background: rgb(235, 207, 211);
+  background: rgb(228, 227, 225);
   padding: 2rem;
   grid-column: 1 / 4;
 }
 
 .left-sidebar {
-  
   grid-column: 1 / 2;
 }
 
@@ -26,12 +26,11 @@ main {
 }
 
 .right-sidebar {
-  
   grid-column: 3 / 4;
 }
 
 footer {
-  background: wheat;
+  background: rgb(228, 227, 225);
   padding: 2rem;
   text-align: center;
   grid-column: 1 / 4;
@@ -45,15 +44,20 @@ body {
 .right-sidebar {
   padding: 1rem;
 }
-.quoteHeader{
+.quoteHeader {
   font-size: 1.5em;
-  color: tomato;}
-
-.content{
-  font-size: 1.5em;
-  color: rgb(126, 71, 255)
+  color: tomato;
 }
-.content1{
+
+.content {
   font-size: 1.5em;
   color: rgb(126, 71, 255);
+}
+.content1 {
+  font-size: 1.5em;
+  color: rgb(126, 71, 255);
+}
+
+#Buttons {
+  display: none;
 }
