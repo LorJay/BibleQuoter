@@ -1,3 +1,22 @@
+// Your web app's Firebase configuration
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyCDEsU6Odd3wU8t4RjsJND6JPNqb_2dmLw",
+    authDomain: "testadsitecreator.firebaseapp.com",
+    databaseURL: "https://testadsitecreator.firebaseio.com",
+    projectId: "testadsitecreator",
+    storageBucket: "testadsitecreator.appspot.com",
+    messagingSenderId: "174643395081",
+    appId: "1:174643395081:web:1c89be6c1a556309c8d6d8",
+    measurementId: "G-VTCEXXW2H9"
+  };
+
+// Initialize Firebase  
+
+firebase.initializeApp(firebaseConfig);
+let database = firebase.database();
+
+
 document.body.style.zoom = "100%";
 var bibleBook = 0;
 var bibleChapter = 0;
@@ -9,6 +28,7 @@ const nextVerseBtn = document.querySelector(".nextVerse");
 const backVerseBtn = document.querySelector(".backVerse");
 const nextChapterBtn = document.querySelector(".nextChapter");
 const prevChapterBtn = document.querySelector(".prevChapter");
+const copyVerseBtn = document.querySelector(".copyVerse");
 const content = document.querySelector(".content");
 const content1 = document.querySelector(".content1");
 const contentHeader = document.querySelector(".quoteHeader");
@@ -17,6 +37,10 @@ const URL =
 //const URL = "http://proverbs1816.com/KJVBible.html";
 
 // Navigation Buttons
+copyVerseBtn.addEventListener("click", () => {
+  copyVerseToFirebase()
+})
+
 
 prevChapterBtn.addEventListener("click", () => {
   bibleChapter = bibleChapter - 1;
@@ -53,7 +77,7 @@ function getData(url) {
 
       // Turn on Bible Nav Buttons
       document.getElementById("Buttons").style.display = "inline";
-      document.body.style.zoom = "80%";
+      window.scrollBy(-75, 200);
 
       // Get a random Book
       numberofBooksBible = Object.keys(response.books).length;
@@ -112,3 +136,32 @@ function getDiffVersion(url1) {
     }
   };
 }
+
+function copyVerseToFirebase() {
+  
+  database.ref("studyverse").push({
+    name: quoteHeader,
+    message: quote
+    
+  })
+}
+var ref = firebase.database().ref("studyverse");
+
+ref.on("value", function (snapshot) {
+  
+  
+  var stuff = snapshot.val()
+  console.log(stuff)
+  ref = database.ref('studyverse');
+  ref.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      console.log(childData.name)
+    });
+});
+
+  
+
+}, function (error) {
+   console.log("Error: " + error.code);
+});
