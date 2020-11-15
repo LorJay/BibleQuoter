@@ -28,7 +28,8 @@ const nextVerseBtn = document.querySelector(".nextVerse");
 const backVerseBtn = document.querySelector(".backVerse");
 const nextChapterBtn = document.querySelector(".nextChapter");
 const prevChapterBtn = document.querySelector(".prevChapter");
-const copyVerseBtn = document.querySelector(".copyVerse");
+const copyVerseBtn = document.getElementById("copyVerse");
+// const copyVerseBtn = document.querySelector(".copyVerse");
 const content = document.querySelector(".content");
 const content1 = document.querySelector(".content1");
 const contentHeader = document.querySelector(".quoteHeader");
@@ -39,6 +40,8 @@ const URL =
 // Navigation Buttons
 copyVerseBtn.addEventListener("click", () => {
   copyVerseToFirebase()
+  copyVerseBtn.innerHTML = "Copied!"
+  copyVerseBtn.disabled = true
 })
 
 
@@ -111,6 +114,8 @@ function displayChapterVerse() {
     response.books[bibleBook].chapters[bibleChapter].verses[bibleVerse].name;
   quote =
     response.books[bibleBook].chapters[bibleChapter].verses[bibleVerse].text;
+  copyVerseBtn.innerHTML = "Copy"
+  copyVerseBtn.disabled = false
 
   // content.textContent = quote;
   contentHeader.textContent = quoteHeader;
@@ -145,23 +150,4 @@ function copyVerseToFirebase() {
     
   })
 }
-var ref = firebase.database().ref("studyverse");
 
-ref.on("value", function (snapshot) {
-  
-  
-  var stuff = snapshot.val()
-  console.log(stuff)
-  ref = database.ref('studyverse');
-  ref.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var childData = childSnapshot.val();
-      console.log(childData.name)
-    });
-});
-
-  
-
-}, function (error) {
-   console.log("Error: " + error.code);
-});
